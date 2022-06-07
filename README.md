@@ -25,6 +25,51 @@ Fish:
 minikube -p <profile> docker-env | source
 ```
 
+## How to run services locally
+
+### MongoDB
+```shell
+cd ./mongodb
+kubectl apply -f .
+```
+### PostgreSQL
+```shell
+cd ./potsgres
+kubectl apply -f .
+```
+
+Credentials:
+
+```shell
+POSTGRES_DB: postgresdb
+POSTGRES_USER: admin
+POSTGRES_PASSWORD: test123
+```
+
+### Exposing services
+
+#### PostgreSQL
+
+To expose PostgreSQL to local server you need to change service kind to `LoadBalancer` instead of `NodePort`
+and execute:
+
+```shell
+kubectl expose deployment postgres --type=LoadBalancer --name=postgres-exp
+```
+
+if you use minukube
+
+```shell
+minikube tunnel
+```
+or
+```shell
+make tunnel
+```
+
+#### MongoDB
+// TBD
+
 ## Cheatsheets
 
 Get all resources
@@ -152,44 +197,6 @@ for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo 
 # Get a deployment's status subresource
 kubectl get deployment nginx-deployment --subresource=status
 ```
-
-## How to run services locally
-
-### MongoDB
-```shell
-cd ./mongodb
-kubectl apply -f .
-```
-### PostgreSQL
-```shell
-cd ./potsgres
-kubectl apply -f .
-```
-
-### Exposing services
-
-#### PostgreSQL
-
-To expose PostgreSQL to local server you need to change service kind to `LoadBalancer` instead of `NodePort`
-and execute:
-
-```shell
-kubectl expose deployment postgres --type=LoadBalancer --name=postgres-exp
-```
-
-if you use minukube
-
-```shell
-minikube tunnel
-```
-or
-```shell
-make tunnel
-```
-
-#### MongoDB
-// TBD
-
 
 ### Helpers
 
