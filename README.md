@@ -1,4 +1,4 @@
-# provision-local
+# Local services provisioning
 Set of manifests to simplify local development using dependent services and databases
 
 
