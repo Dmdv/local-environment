@@ -1,6 +1,10 @@
 # Local services provisioning
 Set of manifests to simplify local development using dependent services and databases
 
+Services can be run in docker context or in K8S minukube environment
+- Docker with docker-compose
+- K8S with helm (or terraform)
+
 
 ## Define global aliases (fish shell)
 
