@@ -1,0 +1,21 @@
+web:
+  build: .
+  command: ./bin/rails server -p 3000 -b 0.0.0.0
+  environment:
+    REDISCLOUD_URL: redis://redis
+    DATABASE_URL: postgres://postgres@db/development
+  volumes:
+    - .:/myapp
+  links:
+    - db
+    - redis
+  ports:
+    - "3000:3000"
+db:
+  image: postgres:9.4.1
+  ports:
+    - "5432:5432"
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
