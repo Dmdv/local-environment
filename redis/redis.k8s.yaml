@@ -2,7 +2,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     io.kompose.service: redis
     app.kubernetes.io/name: redis
@@ -15,7 +14,6 @@ spec:
   strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         io.kompose.service: redis
         app.kubernetes.io/name: redis
@@ -34,12 +32,10 @@ spec:
               memory: 128Mi
 
       restartPolicy: Always
-status: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     io.kompose.service: redis
     app.kubernetes.io/name: redis
@@ -51,5 +47,3 @@ spec:
       targetPort: 6379
   selector:
     io.kompose.service: redis
-status:
-  loadBalancer: {}
