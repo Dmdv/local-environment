@@ -6,6 +6,7 @@ Services can be run in docker context or in K8S minukube environment
 - K8S with helm (or terraform)
 
 ## Kuber management tools
+- Lightweight kubernetes https://k3s.io
 - K3D   https://k3d.io/v5.6.0
 - Lens  https://k8slens.dev
 - K9S   https://k9scli.io

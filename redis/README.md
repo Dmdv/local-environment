@@ -15,4 +15,6 @@
 
 ## References
 
-https://www.dragonflydb.io/guides/redis-kubernetes
+- https://www.dragonflydb.io/guides/redis-kubernetes
+- https://www.airplane.dev/blog/deploy-redis-cluster-on-kubernetes
+- https://phoenixnap.com/kb/kubernetes-redis
