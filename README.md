@@ -17,7 +17,12 @@ alias -s kgp="kubectl get pods"
 
 ## Setup minikube
 
-https://minikube.sigs.k8s.io/docs/start/
+https://minikube.sigs.k8s.io/docs/start
+
+It will start minikube with 2 nodes
+```bash
+minikube start --nodes 2
+```
 
 ### Point Docker CLI to minikube
 
@@ -81,7 +86,7 @@ Get all resources
 kubectl get po -A
 ```
 
-### Kubectl context and configuration
+### Kubectl's context and configuration
 
 ```shell
 kubectl config view # Show Merged kubeconfig settings.
