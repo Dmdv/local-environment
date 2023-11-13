@@ -1,0 +1,39 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+    name: skaffold-example
+build:
+  artifacts:
+  - image: example-app
+    context: .
+    docker:
+      dockerfile: Dockerfile
+  - image: example-web
+    context: web
+    docker:
+      dockerfile: Dockerfile
+
+# Deploy using Helm
+deploy:
+  helm:
+    releases:
+    - name: example-app
+      chartPath: helm/app
+      valuesFiles:
+      - values.yaml
+    - name: example-web
+      chartPath: helm/web
+      valuesFiles:
+      - values.yaml
+
+# Deploy using manifests
+#deploy:
+#  kubectl:
+#    manifests:
+#    - k8s/*.yaml
+
+# Older version
+#  build:
+#    artifacts:
+#    - imageName: skaffold-example
+#      workspace: .
