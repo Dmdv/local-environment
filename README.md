@@ -5,7 +5,14 @@ Services can be run in docker context or in K8S minukube environment
 - Docker with docker-compose
 - K8S with helm (or terraform)
 
-## Kuber management tools
+## Services
+- MongoDB
+- PostgreSQL
+- Redis
+- RabbitMQ
+- NATS
+
+## Kubernetes management tools
 - Lightweight kubernetes https://k3s.io
 - K3D   https://k3d.io/v5.6.0
 - Lens  https://k8slens.dev
@@ -42,22 +49,29 @@ minikube -p <profile> docker-env | source
 ## How to run services locally
 
 ### MongoDB
+
+Connection: \
+Ports: 27017 \
+Credentials: 
+
 ```shell
 cd ./mongodb
 kubectl apply -f .
 ```
 ### PostgreSQL
-```shell
-cd ./potsgres
-kubectl apply -f .
-```
 
+Connection: \
+Ports: 5432 \
 Credentials:
-
 ```shell
 POSTGRES_DB: postgresdb
 POSTGRES_USER: admin
 POSTGRES_PASSWORD: test123
+```
+
+```shell
+cd ./potsgres
+kubectl apply -f .
 ```
 
 ### Exposing services
