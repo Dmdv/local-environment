@@ -17,3 +17,4 @@ kubectl port-forward -n redis-cluster service/redis-server-redis-cluster --addre
 
 # Using redis-cli
 redis-cli -c -h 127.0.0.1 -p 8080 -a 'xxxx'
+kubectl -n redis exec -it redis-0 -- sh

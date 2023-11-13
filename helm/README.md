@@ -13,3 +13,38 @@ helm install redis-test bitnami/redis
 ```shell
 helm search repo bitnami/redis-cluster --versions
 ```
+
+### Storage class
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+```
+
+### The flow that just works
+
+- https://www.airplane.dev/blog/deploy-redis-cluster-on-kubernetes
+
+### PersistentVolume
+
+- redis-pv.yaml
+
+### Config map
+
+- redis-config.yaml
+
+### StatefulSet
+
+- redis-statefulset.yaml
+
+### Shell
+
+```shell
+kubectl -n redis exec -it redis-0 -- sh
+```
