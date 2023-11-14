@@ -30,6 +30,7 @@ reclaimPolicy: Delete
 ### The flow that just works
 
 - https://www.airplane.dev/blog/deploy-redis-cluster-on-kubernetes
+- https://bitnami.com/stack/redis/helm
 
 ### PersistentVolume
 
