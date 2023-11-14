@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# DON'T RUN THIS
+
 # Bitnami Redis
 helm install redis-test bitnami/redis
 
