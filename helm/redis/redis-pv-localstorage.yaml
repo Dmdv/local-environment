@@ -27,6 +27,7 @@ spec:
     path: "/storage/data2"
 
 ---
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:

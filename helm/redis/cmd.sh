@@ -5,8 +5,8 @@
 # Bitnami Redis
 helm install redis-test bitnami/redis
 
-# DO NOT USER this - example using values
-helm install --name redis-cluster -f redis-value.yaml stable/redis
+# DO NOT USE this - example using values
+helm install --name <REDIS-NAME> -f <REDIS-VALUES-FILE>.yaml <HELM-CHART>
 
 # Checking all pods
 kubectl get pods -o wide
