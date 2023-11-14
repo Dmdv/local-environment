@@ -9,7 +9,6 @@ helm install redis-test bitnami/redis
 
 ## Redis Cluster
 
-```bash
 ```shell
 helm search repo bitnami/redis-cluster --versions
 ```

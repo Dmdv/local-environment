@@ -46,7 +46,7 @@ cluster:
 ## create one redis service with ports to the sentinel and the redis instances
 sentinel:
   enabled: true
-  ## Bitnami Redis Sentintel image version
+  ## Bitnami Redis Sentinel image version
   ## ref: https://hub.docker.com/r/bitnami/redis-sentinel/tags/
   ##
   image:
