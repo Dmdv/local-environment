@@ -29,9 +29,9 @@ While [Redis&reg; Helm Chart](https://github.com/bitnami/charts/tree/main/bitnam
 The main features of each chart are the following:
 
 | Redis&reg;                                     | Redis&reg; Cluster                                             |
-|--------------------------------------------------------|------------------------------------------------------------------------|
-| Supports multiple databases                            | Supports only one database. Better if you have a big dataset           |
-| Single write point (single master)                     | Multiple write points (multiple masters)                               |
+|------------------------------------------------|----------------------------------------------------------------|
+| Supports multiple databases                    | Supports only one database. Better if you have a big dataset   |
+| Single write point (single master)             | Multiple write points (multiple masters)                       |
 | ![Redis&reg; Topology](img/redis-topology.png) | ![Redis&reg; Cluster Topology](img/redis-cluster-topology.png) |
 
 Looking to use Redisreg; Cluster in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
