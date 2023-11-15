@@ -1,0 +1,6 @@
+global:
+  redis:
+    password: "development"
+
+replica:
+  replicaCount: 2

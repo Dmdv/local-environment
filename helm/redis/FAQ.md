@@ -5,3 +5,4 @@
 3. How to specify the number of replicas? - `Create yaml property files`
 4. How to change the default password using value file - `Create yaml property files`
 5. How to connect to Redis from the cluster? DNS name? - Check logs after deployment. It will display names.
+6. Do we need sentinel in redis and redis cluster?
