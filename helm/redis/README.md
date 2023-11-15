@@ -188,5 +188,4 @@ kubectl -n redis exec -it redis-0 -- sh
 ### Redis docs
 
 - https://redis.io/docs
-- https://redis.io/docs/management/scaling/
-- 
+- https://redis.io/docs/management/scaling

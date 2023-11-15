@@ -6,6 +6,13 @@
 - Helm: redis
 - Name: redis
 
+Under such configuration we will find redis inside the cluster under following FQDNS:
+
+```
+redis-master.redis.svc.cluster.local for read/write operations (port 6379)
+redis-replicas.redis.svc.cluster.local for read-only operations (port 6379)
+```
+
 ## Password
 ```shell
 export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 -d)
