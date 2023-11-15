@@ -1,5 +1,10 @@
 # Redis
 
+This section contains examples of how redis can be started manually using custom manifests on the local cluster. \
+This is not intended to be used in production.
+
+## Files
+
 - redis.k8s.simple.yaml - is deployment and service manifests combined.
 - redis.k8s.yaml - is deployment and service manifests.
 - redis-service.yaml - is service manifest.
