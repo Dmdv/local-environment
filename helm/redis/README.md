@@ -189,3 +189,7 @@ kubectl -n redis exec -it redis-0 -- sh
 
 - https://redis.io/docs
 - https://redis.io/docs/management/scaling
+
+## Grafana
+
+- https://redis.com/blog/introducing-the-redis-data-source-plug-in-for-grafana
