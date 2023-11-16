@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+    postgres:
+        container_name: postgres_dev
+        image: postgres
+        user: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: postgres
+            # POSTGRES_HOST_AUTH_METHOD: trust
+            PG_TRUST_LOCALNET: "true"
+        healthcheck:
+            test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        ports:
+            - '5432:5432'
+        networks:
+            - postgres_network
+        restart: unless-stopped
+        volumes:
+            - ./pg-data:/var/lib/postgresql/data
+            - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    adminer:
+        container_name: adminer
+        image: adminer
+        restart: always
+        ports:
+        - 8080:8080
+    pgadmin:
+        container_name: pgadmin_dev
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+            PGADMIN_CONFIG_SERVER_MODE: 'False'
+        volumes:
+            - ./pg-admin:/var/lib/pgadmin
+        ports:
+            - '${PGADMIN_PORT:-5050}:80'
+        networks:
+            - postgres_network
+        restart: unless-stopped
+
+networks:
+    postgres_network:
+        driver: bridge
+
+volumes:
+    pg-data:
+    pg-admin:
+    db:
+    certs:
