@@ -1,6 +1,6 @@
 # Helper rules
 
-.PHONY: install uninstall password init
+.PHONY: install uninstall password init shell
 
 init: ## Initializes helm chart
 	@helm repo add nats https://nats-io.github.io/k8s/helm/charts
@@ -13,6 +13,9 @@ uninstall: ## Uninstalls helm chart
 
 password: ## Prints password
 	@kubectl get secret --namespace nats nats -o jsonpath="{.data.NATS_PASSWORD}" | base64 --decode ; echo
+
+shell: ## Opens shell
+	@kubectl exec -n nats -it deployment/nats-box -n nats -- /bin/sh -l
 
 # Helper rules
 
