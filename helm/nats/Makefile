@@ -1,13 +1,18 @@
-.PHONY: install uninstall password
+# Helper rules
+
+.PHONY: install uninstall password init
+
+init: ## Initializes helm chart
+	@helm repo add nats https://nats-io.github.io/k8s/helm/charts
 
 install: ## Installs helm chart
-	@helm install redis bitnami/redis --create-namespace --namespace redis -f values.yaml
+	@helm install nats nats/nats --create-namespace --namespace nats -f values.yaml
 
 uninstall: ## Uninstalls helm chart
-	@helm uninstall redis -n redis
+	@helm uninstall nats -n nats
 
 password: ## Prints password
-	@kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 --decode ; echo
+	@kubectl get secret --namespace nats nats -o jsonpath="{.data.NATS_PASSWORD}" | base64 --decode ; echo
 
 # Helper rules
 
