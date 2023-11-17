@@ -1,6 +1,14 @@
 # NATS installation
 
-nats-box is a NATS server with JetStream enabled.
+## nats-box
+
+Nats-box is a lightweight container with NATS utilities.
+
+- nats - NATS management utility (README)
+- nsc - create NATS accounts and users
+- nats-top - top-like tool for monitoring NATS servers
+
+https://github.com/nats-io/nats-box
 
 ## Repo init
 ```shell
