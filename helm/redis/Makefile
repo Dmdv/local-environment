@@ -1,7 +1,7 @@
 .PHONY: install uninstall password
 
 password: ## Prints password
-	@kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 -d
+	@kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 --decode ; echo
 
 install: ## Installs helm chart
 	@helm install redis bitnami/redis --create-namespace --namespace redis -f values.yaml
