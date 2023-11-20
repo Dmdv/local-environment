@@ -1,13 +1,26 @@
-.PHONY: install uninstall password
+.PHONY: install uninstall password tunnel shell install-client
 
 install: ## Installs helm chart
 	@helm install redis bitnami/redis --create-namespace --namespace redis -f values.yaml
 
+install-client: set-password ## Installs redis client
+	@kubectl run -n redis redis-client --restart='Never' --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis:7.2.3-debian-11-r1 --command -- sleep infinity
+
 uninstall: ## Uninstalls helm chart
 	@helm uninstall redis -n redis
 
+set-password: ## Set password
+	@export REDIS_PASSWORD=$(kubectl get secret -n redis redis -o jsonpath="{.data.redis-password}" | base64 -d)
+
 password: ## Prints password
-	@kubectl get secret --namespace redis redis -o jsonpath="{.data.redis-password}" | base64 --decode ; echo
+	@kubectl get secret -n redis redis -o jsonpath="{.data.redis-password}" | base64 --decode ; echo
+
+tunnel: ## Opens tunnel
+	@kubectl port-forward --namespace redis svc/redis-headless 6379:6379
+
+shell: set-password ## Opens shell
+	@#kubectl -n redis exec  -it svc/redis-master -- /bin/sh -l
+	@kubectl -n redis exec --tty -i redis-client -- bash
 
 # Helper rules
 

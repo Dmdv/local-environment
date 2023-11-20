@@ -17,6 +17,9 @@ password: ## Prints password
 shell: ## Opens shell
 	@kubectl exec -n nats -it deployment/nats-box -n nats -- /bin/sh -l
 
+tunnel: ## Opens tunnel
+	@kubectl port-forward --namespace nats svc/nats 4222:4222
+
 # Helper rules
 
 .PHONY: list

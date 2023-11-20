@@ -20,19 +20,19 @@ export REDIS_PASSWORD=$(kubectl get secret --namespace redis redis -o jsonpath="
 
 ## Run Redis client
 ```shell
-kubectl run --namespace redis redis-client --restart='Never' --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis:7.2.3-debian-11-r1 --command -- sleep infinity
+kubectl run -n redis redis-client --restart='Never' --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis:7.2.3-debian-11-r1 --command -- sleep infinity
 ```
 
-or:
+or if you want to delete the pod after exiting:
 ```shell
-kubectl run --namespace redis redis-cluster --rm --tty -i --restart='Never' --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis:7.2.3-debian-11-r1 -- bash
+kubectl run -n redis redis-client --restart='Never' --rm --tty -i --env REDIS_PASSWORD=$REDIS_PASSWORD --image docker.io/bitnami/redis:7.2.3-debian-11-r1 -- bash
 ```
 
 ## Connect
 
 You can connect to Redis using:
 
-1. Redis-client pod
+1. Redis-client pod (should be installed first)
 2. Port-forward and addressing to localhost using redis-cli
 3. Pod shell and addressing to localhost using redis-cli
 
@@ -59,6 +59,8 @@ With it, you can connect to the Redis server from outside the cluster.
 
 ```shell
 kubectl port-forward --namespace redis svc/redis-master 6379:6379
+// or
+kubectl port-forward --namespace redis svc/redis-headless 6379:6379
 ```
 
 and then connect to the Redis server using redis-cli:
