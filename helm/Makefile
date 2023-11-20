@@ -3,12 +3,10 @@
 .PHONY: init install uninstall
 
 init: ## Initializes helm chart
-	@cd ./redis && make init && cd ..
-	@cd ./nats && make init
+	@cd ./redis && make init && cd .. && cd ./nats && make init
 
 install: ## Installs helm chart
-	@cd ./redis && make install && cd ..
-	@cd ./nats && make install
+	@cd ./redis && make install && cd .. && cd ./nats && make install
 
 uninstall: ## Installs helm chart
 	@cd ./redis && make uninstall && cd ..
