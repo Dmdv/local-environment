@@ -1,5 +1,19 @@
 # Helper rules
 
+.PHONY: init install uninstall
+
+init: ## Initializes helm chart
+	@cd ./redis && make init && cd ..
+	@cd ./nats && make init
+
+install: ## Installs helm chart
+	@cd ./redis && make install && cd ..
+	@cd ./nats && make install
+
+uninstall: ## Installs helm chart
+	@cd ./redis && make uninstall && cd ..
+	@cd ./nats && make uninstall
+
 .PHONY: list
 list: ## List all make targets
 	@${MAKE} -pRrn : -f $(MAKEFILE_LIST) 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | egrep -v -e '^[^[:alnum:]]' -e '^$@$$' | sort
