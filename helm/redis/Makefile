@@ -1,4 +1,7 @@
-.PHONY: install uninstall password tunnel shell install-client
+.PHONY: init install uninstall password tunnel shell install-client
+
+init: ## Initializes helm chart
+	@helm repo add bitnami https://charts.bitnami.com/bitnami
 
 install: ## Installs helm chart
 	@helm install redis bitnami/redis --create-namespace --namespace redis -f values.yaml
