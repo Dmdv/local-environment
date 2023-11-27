@@ -404,6 +404,13 @@ kubectl describe pod private-reg
 
 ## Issues with docker not finding matching manifest for linux/arm64/v8
 
+- https://stackoverflow.com/questions/65612411/forcing-docker-to-use-linux-amd64-platform-by-default-on-macos
+- https://github.com/docker/volumes-backup-extension/issues/105
+- https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
+- https://github.com/docker/for-mac/issues/5625
+- https://github.com/moby/moby/pull/42325
+- https://copyprogramming.com/howto/forcing-docker-to-use-linux-amd64-platform-by-default-on-macos
+
 `no matching manifest for linux/arm64/v8 in the manifest list entries`
 
 ```
