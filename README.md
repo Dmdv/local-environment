@@ -402,6 +402,14 @@ Also, in case the Pod fails to start with the status ImagePullBackOff, view the 
 kubectl describe pod private-reg
 ```
 
+## Issues with docker not finding matching manifest for linux/arm64/v8
+
+`no matching manifest for linux/arm64/v8 in the manifest list entries`
+
+```
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+```
+
 ## Helpers
 
 ### All open ports
