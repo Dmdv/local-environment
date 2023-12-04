@@ -433,6 +433,36 @@ minikube addons list
 minikube cache add <image:tag>
 ```
 
+## Issues when trying to pull from private registry
+
+### When using minikube
+
+Being the secret created and everything is set up properly,\
+the issue is solved with enabling `registry-creds` addon.
+
+### When using docker-desktop
+
+Being the secret created and everything is set up properly,\
+the issue is solved with disabling `containerd`:\
+
+`Settings -> Features in development -> Use containerd for pulling and storing images -> disable`
+
+### Other solutiones tried
+
+Updating service accounts with deefault secret:
+
+```bash
+kubectl edit serviceaccount/default
+```
+
+or
+
+```bash
+kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "regsecret"}]}'
+```
+
+where: `regsecret` is a secret name
+
 ## Helpers
 
 ### All open ports
