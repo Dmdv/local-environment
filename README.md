@@ -417,6 +417,22 @@ kubectl describe pod private-reg
 export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ```
 
+## Issues with Minikube
+
+Usually, issues with etcd or kubelet missining in dependencies.\n
+Solved with propery cache cleaning and chooosing correct kubernetes and docker driver
+
+```shell
+minikube delete --all --purge
+minikube start
+minikube start --container-runtime=containerd
+minikube start --driver=docker
+minikube start --driver=docker --force-systemd=true
+minikube cache list
+minikube addons list
+minikube cache add <image:tag>
+```
+
 ## Helpers
 
 ### All open ports
