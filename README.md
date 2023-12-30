@@ -17,6 +17,7 @@ Services can be run in docker context or in K8S minukube environment
 - K3D   https://k3d.io/v5.6.0
 - Lens  https://k8slens.dev
 - K9S   https://k9scli.io
+- kubectx, kubens
 
 ## Define global aliases (fish shell)
 
