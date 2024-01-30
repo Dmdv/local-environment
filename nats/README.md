@@ -81,3 +81,36 @@ my-push-consumer   Created   mystream   my-push-consumer   none
 #     kubectl describe streams mystream
 #     kubectl describe consumers my-pull-consumer
 ```
+
+## Troubleshooting using NATS BOX
+
+Repo: https://github.com/nats-io/nats-box
+
+Use tools to interact with NATS.
+
+Running in Docker:
+
+```
+$ docker run --rm -it natsio/nats-box:latest
+~ # nats pub -s demo.nats.io test 'Hello World'
+16:33:27 Published 11 bytes to "test"
+```
+
+Running in Kubernetes:
+
+```
+kubectl run -it --rm nats-box --image=natsio/nats-box --restart=Never -- nats sub -s demo.nats.io test
+```
+
+or 
+
+```
+# Interactive mode
+kubectl run -i --rm --tty nats-box --image=natsio/nats-box --restart=Never
+nats-box:~# nats sub -s nats hello &
+nats-box:~# nats pub -s nats hello world
+
+# Non-interactive mode
+kubectl apply -f https://nats-io.github.io/k8s/tools/nats-box.yml
+kubectl exec -it nats-box -- /bin/sh
+```
