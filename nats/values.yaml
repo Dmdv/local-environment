@@ -1,0 +1,24 @@
+config:
+  cluster:
+    enabled: true
+    replicas: 3
+
+  jetstream:
+    enabled: true
+
+# Uncomment if required
+#    memStorage:
+#      enabled: true
+#      size: "3Gi"
+
+    fileStore:
+      enabled: true
+      dir: /data
+
+# Uncomment if required
+#      size: "1Gi"
+#      storageDirectory: /data/
+#      storageClassName: standard
+
+  gateway:
+    enabled: true
