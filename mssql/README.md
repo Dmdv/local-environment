@@ -17,7 +17,6 @@ There 2 ways to install MSSQL locally in docker with the same results:
 
 ### sqlcmd
 
-```shell
 Install sqlcmd 
 ```shell
 brew install sqlcmd

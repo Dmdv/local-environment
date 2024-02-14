@@ -1,0 +1,13 @@
+/Entropy.bin
+/master.mdf
+/mastlog.ldf
+/model.mdf
+/model_msdbdata.mdf
+/model_msdblog.ldf
+/model_replicatedmaster.ldf
+/model_replicatedmaster.mdf
+/modellog.ldf
+/msdbdata.mdf
+/msdblog.ldf
+/tempdb.mdf
+/templog.ldf
