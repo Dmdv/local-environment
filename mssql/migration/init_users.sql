@@ -4,9 +4,9 @@ GO
 DROP DATABASE IF EXISTS [development];
 GO
 
-IF EXISTS (SELECT * FROM sys.server_principals WHERE name = 'app_user' AND type = 'S')
+IF EXISTS (SELECT * FROM sys.server_principals WHERE name = 'db_admin_test_user' AND type = 'S')
 BEGIN
-    DROP LOGIN app_user;
+    DROP LOGIN db_admin_test_user;
 END
 
 CREATE DATABASE [development] collate SQL_Latin1_General_CP1_CI_AS;
@@ -78,24 +78,55 @@ GO
 
 --- Create logins
 
-USE [master];
+USE [development];
 GO
 
 -- Create an admin login
+
 CREATE LOGIN [db_admin_test_user] WITH PASSWORD = 'admin$Pass';
 GO
 
--- Create an application login
-CREATE LOGIN [db_exchange_test_user] WITH PASSWORD = 'user$Pass';
+-- Create a user for the admin login
+CREATE USER [db_admin_test_user] FOR LOGIN [db_admin_test_user] WITH DEFAULT_SCHEMA=[dbo];
 GO
 
 --- Create users
 
-USE [development];
+CREATE LOGIN [db_exchange_test_user] WITH PASSWORD = 'user$Pass';
 GO
 
-CREATE LOGIN app_user WITH PASSWORD = 'appuser$Pass';
+-- Create a user for the application login
+CREATE USER [db_exchange_test_user] FOR LOGIN [db_exchange_test_user] WITH DEFAULT_SCHEMA=[dbo];
 GO
 
-CREATE USER [app_user] FOR LOGIN [app_user] WITH DEFAULT_SCHEMA=[dbo];
+-- Assign the 'db_owner' role to the admin user
+-- This role can manage all aspects of the database
+
+-- Alternatively,
+-- Grant the application user access to the database
+-- ALTER ROLE db_datareader ADD MEMBER db_exchange_test_user;
+
+EXEC sp_addrolemember 'db_owner','db_admin_test_user';
+EXEC sp_addrolemember 'db_datareader', 'db_admin_test_user';
+EXEC sp_addrolemember 'db_datawriter', 'db_admin_test_user';
+EXEC sp_addrolemember 'db_ddladmin', 'db_admin_test_user';
+EXEC sp_addrolemember 'db_backupoperator', 'db_admin_test_user';
+GO
+
+-- Assign specific roles to the application user
+-- Granting 'db_datareader' and 'db_datawriter' roles for basic data access
+EXEC sp_addrolemember 'db_owner', 'db_exchange_test_user';
+EXEC sp_addrolemember 'db_datareader', 'db_exchange_test_user';
+EXEC sp_addrolemember 'db_datawriter', 'db_exchange_test_user';
+GO
+
+-- Optionally, grant execute permissions to the application user
+-- This allows the user to execute stored procedures
+GRANT EXECUTE TO [db_exchange_test_user];
+GRANT SELECT, INSERT, UPDATE, DELETE TO [db_exchange_test_user];
+GO
+
+GRANT CONNECT ON DATABASE::[development] TO [db_exchange_test_user];
+GO
+GRANT CONNECT ON DATABASE::[development] TO [db_admin_test_user];
 GO
