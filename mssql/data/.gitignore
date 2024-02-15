@@ -11,3 +11,5 @@
 /msdblog.ldf
 /tempdb.mdf
 /templog.ldf
+/development.mdf
+/development_log.ldf
