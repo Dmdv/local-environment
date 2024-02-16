@@ -28,6 +28,7 @@ services:
   sqlcmd:
     container_name: mssql-migration
     image: mcr.microsoft.com/mssql-tools:latest
+    platform: linux/amd64
     env_file: .env
     volumes:
       - ./migration:/opt/migration
