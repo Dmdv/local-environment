@@ -4,6 +4,7 @@ services:
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/azure-sql-edge:latest
+    env_file: .env
     cap_add: [ 'SYS_PTRACE' ]
     stdin_open: true
     ports:
@@ -13,20 +14,20 @@ services:
     volumes:
       - ./data:/var/opt/mssql/data
     healthcheck:
-        test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P '0o0*5YMI4Ts' -Q 'SELECT 1' || exit 1"]
+        test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q 'SELECT 1' || exit 1"]
         interval: 10s
         start_period: 10s
         timeout: 5s
         retries: 5
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "0o0*5YMI4Ts"
       MSSQL_RPC_PORT: 135
       MSSQL_PID: Developer
 
   sqlcmd:
     container_name: mssql-migration
     image: mcr.microsoft.com/mssql-tools:latest
+    env_file: .env
     volumes:
       - ./migration:/opt/migration
     command: /opt/migration/run.sh
@@ -36,8 +37,6 @@ services:
     stdin_open: true
     networks:
       - mssql_net
-    environment:
-      MSSQL_SA_PASSWORD: "0o0*5YMI4Ts"
 
 networks:
   mssql_net:

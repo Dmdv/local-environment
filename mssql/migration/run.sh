@@ -15,3 +15,5 @@ echo "Import data"
 echo "Data imported"
 
 echo "Migration completed"
+
+exit 0
