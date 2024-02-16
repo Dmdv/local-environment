@@ -4,6 +4,7 @@ services:
   mssql:
     container_name: mssql
     image: mcr.microsoft.com/azure-sql-edge:latest
+    platform: linux/amd64
     env_file: .env
     cap_add: [ 'SYS_PTRACE' ]
     stdin_open: true
