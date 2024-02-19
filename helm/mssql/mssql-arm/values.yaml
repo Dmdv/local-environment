@@ -41,7 +41,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 1443
 
 ingress:
   enabled: false
@@ -95,10 +95,10 @@ volumes: []
 #     optional: false
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+ - name: data
+   mountPath: "/var/opt/mssql"
+   readOnly: false
 
 nodeSelector: {}
 
