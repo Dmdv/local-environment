@@ -35,3 +35,18 @@ https://github.com/cagrin/azure-sql-edge-arm64
 ```shell
 docker-compose up -d
 ```
+
+## Connect
+
+```shell
+kubectl run sqltools --image=microsoft/mssql-tools -ti --restart=Never --rm=true -- /bin/bash
+```
+
+```shell
+sqlcmd -S sql-server-mssql-linux -U sa
+```
+
+```shell
+SELECT @@VERSION;
+GO
+```
