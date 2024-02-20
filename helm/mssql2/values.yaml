@@ -1,0 +1,31 @@
+mssql:
+  image: mcr.microsoft.com/azure-sql-edge:latest
+  platform: linux/amd64
+  env:
+    ACCEPT_EULA: "Y"
+    MSSQL_RPC_PORT: 135
+    MSSQL_PID: "Developer"
+    MSSQL_SA_PASSWORD: ""
+  ports:
+    - name: mssql
+      containerPort: 1433
+      servicePort: 1433
+  persistence:
+    mountPath: /var/opt/mssql/data
+    storageSize: 10Gi
+  healthcheck:
+    test: "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q 'SELECT 1' || exit 1"
+    interval: 10s
+    startPeriod: 10s
+    timeout: 5s
+    retries: 5
+
+sqlcmd:
+  image: mcr.microsoft.com/mssql-tools:latest
+  platform: linux/amd64
+  mountPath: /opt/migration
+  scriptName: run.sh
+
+networkPolicy:
+  enabled: true
+

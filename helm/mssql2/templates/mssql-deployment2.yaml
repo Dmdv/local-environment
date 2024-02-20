@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "my-mssql-helm-chart.fullname" . }}-mssql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "my-mssql-helm-chart.fullname" . }}-mssql
+  template:
+    metadata:
+      labels:
+        app: {{ include "my-mssql-helm-chart.fullname" . }}-mssql
+    spec:
+      containers:
+        - name: mssql
+          image: "{{ .Values.mssql.image }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.mssql.ports.containerPort }}
+              protocol: TCP
+          volumeMounts:
+            - name: mssql-data
+              mountPath: /var/opt/mssql/data
+          envFrom:
+            - configMapRef:
+                name: {{ include "my-mssql-helm-chart.fullname" . }}-mssql-config
+          env:
+            - name: ACCEPT_EULA
+              value: "{{ .Values.mssql.environment.ACCEPT_EULA }}"
+            - name: MSSQL_RPC_PORT
+              value: "{{ .Values.mssql.environment.MSSQL_RPC_PORT }}"
+            - name: MSSQL_PID
+              value: "{{ .Values.mssql.environment.MSSQL_PID }}"
+          readinessProbe:
+            exec:
+              command: {{ .Values.mssql.healthcheck.test }}
+            initialDelaySeconds: {{ .Values.mssql.healthcheck.startPeriod }}
+            periodSeconds: {{ .Values.mssql.healthcheck.interval }}
+            timeoutSeconds: {{ .Values.mssql.healthcheck.timeout }}
+            failureThreshold: {{ .Values.mssql.healthcheck.retries }}
+          livenessProbe:
+            exec:
+              command: {{ .Values.mssql.healthcheck.test }}
+            initialDelaySeconds: {{ .Values.mssql.healthcheck.startPeriod }}
+            periodSeconds: {{ .Values.mssql.healthcheck.interval }}
+            timeoutSeconds: {{ .Values.mssql.healthcheck.timeout }}
+            failureThreshold: {{ .Values.mssql.healthcheck.retries }}
+      volumes:
+        - name: mssql-data
+          persistentVolumeClaim:
+            claimName: {{ include "my-mssql-helm-chart.fullname" . }}-mssql-pvc
