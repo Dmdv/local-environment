@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "my-mssql-helm-chart.fullname" . }}-sqlcmd
+spec:
+  template:
+    spec:
+      containers:
+        - name: sqlcmd
+          image: "{{ .Values.sqlcmd.image }}"
+          command: ["/bin/bash", "-c", "/opt/migration/{{ .Values.sqlcmd.scriptName }}"]
+          volumeMounts:
+            - name: migration-scripts
+              mountPath: {{ .Values.sqlcmd.mountPath }}
+      restartPolicy: Never
+      volumes:
+        - name: migration-scripts
+          configMap:
+            name: {{ include "my-mssql-helm-chart.fullname" . }}-sqlcmd-config
+  backoffLimit: 4

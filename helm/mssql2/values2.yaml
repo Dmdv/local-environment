@@ -1,0 +1,19 @@
+mssql:
+  image: mcr.microsoft.com/azure-sql-edge:latest
+  platform: linux/amd64
+  ports:
+    - name: mssql
+      containerPort: 1433
+      servicePort: 1433
+  volumes:
+    data: ./data
+  environment:
+    ACCEPT_EULA: Y
+    MSSQL_RPC_PORT: 135
+    MSSQL_PID: Developer
+
+sqlcmd:
+  image: mcr.microsoft.com/mssql-tools:latest
+  platform: linux/amd64
+  migrationVolume: ./migration
+  migrationCommand: /opt/migration/run.sh
