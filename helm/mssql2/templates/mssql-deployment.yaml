@@ -26,13 +26,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ template "mssql.fullname" . }}-mssql-config
-          env:
-            - name: ACCEPT_EULA
-              value: "{{ .Values.mssql.environment.ACCEPT_EULA }}"
-            - name: MSSQL_RPC_PORT
-              value: "{{ .Values.mssql.environment.MSSQL_RPC_PORT }}"
-            - name: MSSQL_PID
-              value: "{{ .Values.mssql.environment.MSSQL_PID }}"
           readinessProbe:
             exec:
               command: {{ .Values.mssql.healthcheck.test }}

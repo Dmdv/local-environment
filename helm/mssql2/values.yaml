@@ -1,6 +1,7 @@
 mssql:
   image: mcr.microsoft.com/azure-sql-edge:latest
   platform: linux/amd64
+
   env:
     ACCEPT_EULA: "Y"
     MSSQL_RPC_PORT: 135
