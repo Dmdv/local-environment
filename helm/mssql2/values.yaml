@@ -27,7 +27,7 @@ mssql:
     annotations: { }
 
   healthcheck:
-    startPeriod: 30
+    startPeriod: 20
     interval: 20
     timeout: 10
     retries: 5
