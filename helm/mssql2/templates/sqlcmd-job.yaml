@@ -8,7 +8,7 @@ spec:
       containers:
         - name: sqlcmd
           image: "{{ .Values.sqlcmd.image }}"
-          command: ["/bin/bash", "-c", "/opt/migration/{{ .Values.sqlcmd.scriptName }}"]
+          command: ["/bin/bash", "-c", "{{ .Values.sqlcmd.mountPath }}/{{ .Values.sqlcmd.scriptName }}"]
           volumeMounts:
             - name: migration-scripts
               mountPath: {{ .Values.sqlcmd.mountPath }}
