@@ -1,13 +1,25 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "my-mssql-helm-chart.fullname" . }}-mssql
+  name: {{ template "mssql.fullname" . }}
+  labels:
+    app: {{ template "mssql.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+{{- if .Values.service.labels }}
+{{ toYaml .Values.service.labels | indent 4 }}
+{{- end }}
+{{- if .Values.service.annotations }}
+  annotations:
+{{ toYaml .Values.service.annotations | indent 4 }}
+{{- end }}
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.mssql.ports.servicePort }}
-      targetPort: {{ .Values.mssql.ports.containerPort }}
+    - name: mssql
+      port: {{ .Values.mssql.service.port }}
+      targetPort: mssql
       protocol: TCP
-      name: mssql
   selector:
-    app: {{ include "my-mssql-helm-chart.name" . }}-mssql
+    app:{{ template "mssql.fullname" . }}-mssql
