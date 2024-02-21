@@ -2,9 +2,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "mssql.fullname" . }}-data
+  name: {{ include "mssql.fullname" . }}-data
   labels:
-    app: {{ template "mssql.fullname" . }}
+    app: {{ include "mssql.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"

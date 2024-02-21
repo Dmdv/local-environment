@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "mssql.fullname" . }}-sqlcmd
+  name: {{ include "mssql.fullname" . }}-sqlcmd
 spec:
   template:
     spec:
@@ -16,5 +16,5 @@ spec:
       volumes:
         - name: migration-scripts
           configMap:
-            name: {{ template "mssql.fullname" . }}-sqlcmd-config
+            name: {{ template "mssql.fullname" . }}-config
   backoffLimit: 4

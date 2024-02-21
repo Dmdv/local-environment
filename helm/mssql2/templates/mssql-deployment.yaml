@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "mssql.fullname" . }}-mssql
+  name: {{ include "mssql.fullname" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ template "mssql.fullname" . }}-mssql
+      app: {{ include "mssql.fullname" . }}
   template:
     metadata:
       labels:
-        app: {{ template "mssql.fullname" . }}-mssql
+        app: {{ include "mssql.fullname" . }}
     spec:
       containers:
-        - name: mssql
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.mssql.image }}"
           imagePullPolicy: IfNotPresent
           ports:
-            - name: mssql
+            - name: {{ .Chart.Name }}
               containerPort: {{ .Values.mssql.service.port }}
               protocol: TCP
           volumeMounts:
-            - name: {{ template "mssql.fullname" . }}-data
+            - name: {{ include "mssql.fullname" . }}-data
               mountPath: /var/opt/mssql
           envFrom:
             - configMapRef:
-                name: {{ template "mssql.fullname" . }}-mssql-config
+                name: {{ include "mssql.fullname" . }}-config
           readinessProbe:
             exec:
               command: {{ .Values.mssql.healthcheck.test }}
@@ -41,6 +41,6 @@ spec:
             timeoutSeconds: {{ .Values.mssql.healthcheck.timeout }}
             failureThreshold: {{ .Values.mssql.healthcheck.retries }}
       volumes:
-        - name: {{ template "mssql.fullname" . }}-data
+        - name: {{ include "mssql.fullname" . }}-data
           persistentVolumeClaim:
-            claimName: {{ template "mssql.fullname" . }}-mssql-pvc
+            claimName: {{ include "mssql.fullname" . }}-data

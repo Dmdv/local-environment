@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "mssql.fullname" . }}-mssql-config
+  name: {{ include "mssql.fullname" . }}-config
 data:
   ACCEPT_EULA: "{{ .Values.mssql.env.ACCEPT_EULA }}"
   MSSQL_RPC_PORT: "{{ .Values.mssql.env.MSSQL_RPC_PORT }}"
