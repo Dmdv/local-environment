@@ -21,8 +21,8 @@ spec:
               containerPort: {{ .Values.mssql.service.port }}
               protocol: TCP
           volumeMounts:
-            - name: mssql-data
-              mountPath: /var/opt/mssql/data
+            - name: {{ template "mssql.fullname" . }}-data
+              mountPath: /var/opt/mssql
           envFrom:
             - configMapRef:
                 name: {{ template "mssql.fullname" . }}-mssql-config
@@ -41,6 +41,6 @@ spec:
             timeoutSeconds: {{ .Values.mssql.healthcheck.timeout }}
             failureThreshold: {{ .Values.mssql.healthcheck.retries }}
       volumes:
-        - name: mssql-data
+        - name: {{ template "mssql.fullname" . }}-data
           persistentVolumeClaim:
             claimName: {{ template "mssql.fullname" . }}-mssql-pvc
