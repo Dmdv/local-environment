@@ -9,6 +9,8 @@ mssql:
 
   service:
     port: 1433
+    annotations: { }
+    labels: { }
 
   persistence:
     mountPath: /var/opt/mssql/data
