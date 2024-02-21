@@ -22,7 +22,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: {{ include "mssql.fullname" . }}-data
-              mountPath: /var/opt/mssql
+              mountPath: {{ .Values.mssql.persistence.mountPath }}
           envFrom:
             - configMapRef:
                 name: {{ include "mssql.fullname" . }}-config

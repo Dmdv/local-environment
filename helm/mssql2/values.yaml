@@ -18,9 +18,8 @@ mssql:
     labels: { }
 
   persistence:
-    mountPath: /var/opt/mssql/data
+    mountPath: /var/opt/mssql/
     storageSize: 10Gi
-    enabled: true
     existingDataClaim: false
     storageClass: ""
     dataAccessMode: ReadWriteOnce
