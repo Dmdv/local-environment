@@ -15,11 +15,10 @@ metadata:
 {{ toYaml .Values.mssql.service.annotations | indent 4 }}
 {{- end }}
 spec:
+  selector:
+    app: {{ include "mssql.fullname" . }}
   type: ClusterIP
   ports:
-    - name: {{ .Chart.Name }}
+    - protocol: TCP
       port: {{ .Values.mssql.service.port }}
       targetPort: {{ .Chart.Name }}
-      protocol: TCP
-  selector:
-    app:{{ template "mssql.fullname" . }}
