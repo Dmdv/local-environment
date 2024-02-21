@@ -13,6 +13,12 @@ mssql:
   persistence:
     mountPath: /var/opt/mssql/data
     storageSize: 10Gi
+    enabled: true
+    # existingDataClaim:
+    storageClass: ""
+    dataAccessMode: ReadWriteOnce
+    dataSize: 1Gi
+
   healthcheck:
     test: "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -Q 'SELECT 1' || exit 1"
     interval: 10s
