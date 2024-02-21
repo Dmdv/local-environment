@@ -6,10 +6,10 @@ mssql:
     MSSQL_RPC_PORT: 135
     MSSQL_PID: "Developer"
     MSSQL_SA_PASSWORD: ""
-  ports:
-    - name: mssql
-      containerPort: 1433
-      servicePort: 1433
+
+  service:
+    port: 1433
+
   persistence:
     mountPath: /var/opt/mssql/data
     storageSize: 10Gi
