@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "my-mssql-helm-chart.fullname" . }}-sqlcmd
+  name: {{ template "mssql.fullname" . }}-sqlcmd
 spec:
   template:
     spec:
@@ -16,5 +16,5 @@ spec:
       volumes:
         - name: migration-scripts
           configMap:
-            name: {{ include "my-mssql-helm-chart.fullname" . }}-sqlcmd-config
+            name: {{ template "mssql.fullname" . }}-sqlcmd-config
   backoffLimit: 4
