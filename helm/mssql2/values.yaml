@@ -37,6 +37,7 @@ sqlcmd:
   image: mcr.microsoft.com/mssql-tools:latest
   platform: linux/amd64
   mountPath: /opt/migration
+  hostPath: ./migration
   scriptName: run.sh
 
 networkPolicy:

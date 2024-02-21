@@ -15,6 +15,7 @@ spec:
       restartPolicy: Never
       volumes:
         - name: migration-scripts
-          configMap:
-            name: {{ template "mssql.fullname" . }}-config
+          hostPath:
+            path: {{ .Values.sqlcmd.hostPath }}
+            type: Directory
   backoffLimit: 4
