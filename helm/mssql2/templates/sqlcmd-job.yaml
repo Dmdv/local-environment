@@ -12,6 +12,9 @@ spec:
           volumeMounts:
             - name: migration-scripts
               mountPath: {{ .Values.sqlcmd.mountPath }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "mssql.fullname" . }}-config
       restartPolicy: Never
       volumes:
         - name: migration-scripts
