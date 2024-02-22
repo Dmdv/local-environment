@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: scripts-configmap
 data:
-{{ (.Files.Glob "migration/init_data.sql").AsConfig | indent 2 }}
+{{ (.Files.Glob "migration/*").AsConfig | indent 2 }}
