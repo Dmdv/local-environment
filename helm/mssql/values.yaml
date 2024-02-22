@@ -35,7 +35,7 @@ mssql:
 sqlcmd:
   image: mcr.microsoft.com/mssql-tools:latest
   mountPath: /opt/migration
-  hostPath: ./migration
+  hostPath: /Users/dmitry_dyachkov/go/env/local-environment/helm/mssql/migration
   scriptName: run.sh
 
 networkPolicy:
