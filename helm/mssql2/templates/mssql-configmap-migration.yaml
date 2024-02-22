@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: scripts-configmap
+  name: {{ .Release.Name }}-migrations
+  labels:
+    {{- include "mssql.labels" . | nindent 4 }}
 data:
 {{ (.Files.Glob "migration/*").AsConfig | indent 2 }}
