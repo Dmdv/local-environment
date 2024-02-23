@@ -41,3 +41,25 @@ sqlcmd:
 ```shell
 helm install mssql ./mssql --create-namespace --namespace mssql
 ```
+
+## Troubleshooting
+
+- 0/1 nodes are available: 1 pod has unbound immediate PersistentVolumeClaims
+
+### Solution:
+
+https://stackoverflow.com/questions/74741993/0-1-nodes-are-available-1-pod-has-unbound-immediate-persistentvolumeclaims
+
+Download rancher.io/local-path storage class:
+
+```shell
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+```
+
+Check with kubectl get storageclass. 
+
+Make this storage class (local-path) the default:
+
+```shell
+kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
