@@ -1,4 +1,9 @@
 #!/bin/sh
+set -e
+
+echo "Checking connection to database and failing if it's not available"
+
+/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "$MSSQL_SA_PASSWORD" -Q "SELECT 1" > /dev/null || exit 1
 
 echo "Starting migration"
 
