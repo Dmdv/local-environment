@@ -12,16 +12,21 @@ This chart is created not for production but for local env to start development 
 
 Name `dev-mssql.mssql.svc.cluster.local` is hardcoded in scripts
 
+## Images
+- mcr.microsoft.com/mssql-tools:latest - for linux
+- mcr.microsoft.com/azure-sql-edge:latest - for arm64
+
+The main criteria for choosing the image is the mssql folder at `/opt/mssql-tools`
+
 ## Migrations scripts
 
 `hostPath` should contain absolute path to the migration scripts.
-'run.sh' should have reference to the server in FQND format: \
-<service>.<namespace>.svc.cluster.local
+'run.sh' should have reference to the server in **FQND** format: \
+`<service>.<namespace>.svc.cluster.local`
+
 ```
 dev-mssql.mssql.svc.cluster.local
 ```
-
-```bash
 
 ```yaml
 sqlcmd:
