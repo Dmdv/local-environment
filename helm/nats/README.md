@@ -4,6 +4,10 @@
 
 Nats-box is a lightweight container with NATS utilities.
 
+```shell
+kubectl run -i --rm --tty nats-box --image=natsio/nats-box --restart=Never
+```
+
 - nats - NATS management utility (README)
 - nsc - create NATS accounts and users
 - nats-top - top-like tool for monitoring NATS servers

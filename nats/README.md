@@ -31,6 +31,10 @@ helm install nats nats/nats --create-namespace --namespace nats -f values.yaml
 
 ## NATS-BOX client installation
 
+```shell
+kubectl run -i --rm --tty nats-box --image=natsio/nats-box --restart=Never
+```
+
 NATS-BOX is a lightweight container with NATS utilities.
 
 - nats - NATS management utility (README)
