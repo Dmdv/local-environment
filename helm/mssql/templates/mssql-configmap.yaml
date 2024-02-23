@@ -6,4 +6,4 @@ data:
   ACCEPT_EULA: "{{ .Values.mssql.env.ACCEPT_EULA }}"
   MSSQL_RPC_PORT: "{{ .Values.mssql.env.MSSQL_RPC_PORT }}"
   MSSQL_PID: "{{ .Values.mssql.env.MSSQL_PID }}"
-  MSSQL_SA_PASSWORD: "0o0*5YMI4Ts"
+  MSSQL_SA_PASSWORD: "{{ .Values.mssql.env.MSSQL_SA_PASSWORD }}"

@@ -9,7 +9,7 @@ mssql:
     ACCEPT_EULA: "Y"
     MSSQL_RPC_PORT: 135
     MSSQL_PID: "Developer"
-    MSSQL_SA_PASSWORD: ""
+    MSSQL_SA_PASSWORD: "0o0*5YMI4Ts"
 
   service:
     port: 1433

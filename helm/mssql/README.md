@@ -39,5 +39,5 @@ sqlcmd:
 ## Install
 
 ```shell
-helm install dev ./mssql --create-namespace --namespace mssql
+helm install mssql ./mssql --create-namespace --namespace mssql
 ```
